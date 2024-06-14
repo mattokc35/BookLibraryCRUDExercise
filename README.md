@@ -1,30 +1,69 @@
-# React + TypeScript + Vite
+# Book Library CRUD Coding Exercise
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple CRUD application I built that allows users to Create, Read, Update, and Delete books from a library.
 
-Currently, two official plugins are available:
+I used `React`, `React-Router`, `TypeScript`, and `Zustand` for the frontend, `Node.js` + `Express` for the backend API, and `Jest` for unit testing.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+Here are the features I implemented for the frontend:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- The user can view all books
+- The user can edit a book
+- The user can add a book
+- The user can delete a book
+- The user can search for a book by entering a book title or author's name
+- The user can sort books by title (A-Z or Z-A)
+- The user can sort books by author's name (A-Z or Z-A)
+- The user can select one genre for a book, or also assign multiple genres up to 5 per book
+- The user can enable/disable pagination and also adjust the number of books per page
 
-- Configure the top-level `parserOptions` property like this:
+## Demo
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Follow these steps to demo this application on your local machine:
+
+First, clone this repository:
+
+```
+git clone https://github.com/mattokc35/BookLibraryCRUDExercise.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Next, in the root folder, run:
+```
+npm install
+```
+then run:
+```
+npm run dev
+```
+to start up the frontend development server with `Vite`.
+
+Now we will startup the backend server. First, in a separate terminal window navigate to the server directory.
+```
+cd server
+```
+Then run:
+```
+npm install
+```
+Finally, run:
+```
+npm run dev
+```
+
+to start up the backend server with `Nodemon`.
+
+Navigate to `http://localhost:5173` to start interacting with the UI!
+
+## Testing
+
+Unit Testing are implemented in this project using Jest. 
+
+To run the unit tests, first navigate to the root directory then simply run (don't run this at the same time you have the backend running as it may cause an port address conflict error):
+
+```
+npm test
+```
+
+This will run the `jest --watchAll` command.
+
