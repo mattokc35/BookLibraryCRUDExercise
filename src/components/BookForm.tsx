@@ -6,6 +6,7 @@ import {
   FormGroup,
   Button,
   ErrorMessage,
+  ButtonContainer,
 } from "./styled/styledComponents";
 import { Genre } from "../types/Types";
 
@@ -167,7 +168,10 @@ const BookForm: React.FC<BookFormProps> = ({
           />
           {genreError && <ErrorMessage>{genreError}</ErrorMessage>}
         </FormGroup>
-        <Button type="submit">{submitButtonLabel}</Button>
+        <ButtonContainer>
+          <Button type="submit">{submitButtonLabel}</Button>
+          <Button onClick={() => navigate("/")}>Cancel</Button>
+        </ButtonContainer>
       </form>
     </FormContainer>
   );
