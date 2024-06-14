@@ -15,6 +15,7 @@ Here are the features I implemented for the frontend:
 - The user can search for a book by entering a book title or author's name
 - The user can sort books by title (A-Z or Z-A)
 - The user can sort books by author's name (A-Z or Z-A)
+- The user can sort books by year published (newest-oldest or oldest-newest)
 - The user can select one genre for a book, or also assign multiple genres up to 5 per book
 - The user can enable/disable pagination and also adjust the number of books per page
 
