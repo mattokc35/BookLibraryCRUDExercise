@@ -5,6 +5,8 @@ import {
   ButtonContainer,
   PopupContainer,
 } from "./styled/styledComponents";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 interface DeletePopUp {
   isOpen: boolean;
@@ -26,8 +28,14 @@ const DeletePopUp: React.FC<DeletePopUp> = ({
         Are you sure you want to delete this book?
       </div>
       <ButtonContainer>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={onConfirm}>Confirm</Button>
+        <Button onClick={onClose}>
+          <FontAwesomeIcon icon={faBan} style={{ marginRight: "5px" }} />
+          Cancel
+        </Button>
+        <Button onClick={onConfirm}>
+          <FontAwesomeIcon icon={faCheck} style={{ marginRight: "5px" }} />
+          Confirm
+        </Button>
       </ButtonContainer>
     </PopupContainer>
   );

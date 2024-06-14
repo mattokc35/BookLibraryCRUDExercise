@@ -13,6 +13,8 @@ import {
 import useStore from "../store";
 import Book from "../components/Book";
 import { booksPerPageOptions, sortOptions } from "../constants/constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const BookList: React.FC = () => {
   const { books, fetchBooks, deleteBook, fetchGenres } = useStore();
@@ -92,7 +94,10 @@ const BookList: React.FC = () => {
       <BookListContainer>
         <Title>Book Collection</Title>
         <ButtonContainer>
-          <Button onClick={() => navigate("/add")}>Add New Book</Button>
+          <Button onClick={() => navigate("/add")}>
+            <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
+            Add New Book
+          </Button>
           <Button onClick={() => setUsePagination(!usePagination)}>
             {usePagination ? "Disable Pagination" : "Enable Pagination"}
           </Button>

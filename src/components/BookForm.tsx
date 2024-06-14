@@ -9,6 +9,8 @@ import {
   ButtonContainer,
 } from "./styled/styledComponents";
 import { Genre } from "../types/Types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 interface BookFormProps {
   initialValues?: {
@@ -169,8 +171,17 @@ const BookForm: React.FC<BookFormProps> = ({
           {genreError && <ErrorMessage>{genreError}</ErrorMessage>}
         </FormGroup>
         <ButtonContainer>
-          <Button type="submit">{submitButtonLabel}</Button>
-          <Button onClick={() => navigate("/")}>Cancel</Button>
+          <Button type="submit">
+            <FontAwesomeIcon
+              icon={faFloppyDisk}
+              style={{ marginRight: "5px" }}
+            />
+            {submitButtonLabel}
+          </Button>
+          <Button onClick={() => navigate("/")}>
+            <FontAwesomeIcon icon={faBan} style={{ marginRight: "5px" }} />
+            Cancel
+          </Button>
         </ButtonContainer>
       </form>
     </FormContainer>

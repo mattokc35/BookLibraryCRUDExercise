@@ -8,6 +8,8 @@ import {
   Button,
   ButtonContainer,
 } from "./styled/styledComponents";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface BookProps {
   book: BookType;
@@ -61,8 +63,14 @@ const Book: React.FC<BookProps> = ({ book, onDelete }) => {
             ))}
           </p>
           <ButtonContainer>
-            <Button onClick={() => navigate(`/edit/${book.id}`)}>Edit</Button>
-            <Button onClick={handleDeleteClick}>Delete</Button>
+            <Button onClick={() => navigate(`/edit/${book.id}`)}>
+              <FontAwesomeIcon icon={faEdit} style={{ marginRight: "5px" }} />
+              Edit
+            </Button>
+            <Button onClick={handleDeleteClick}>
+              <FontAwesomeIcon icon={faTrash} style={{ marginRight: "5px" }} />
+              Delete
+            </Button>
           </ButtonContainer>
         </>
       )}
