@@ -32,7 +32,7 @@ const Book: React.FC<BookProps> = ({ book, onDelete }) => {
   };
 
   return (
-    <BookCard className="book-card">
+    <BookCard>
       {isPopupOpen ? (
         <>
           <DeletePopUp

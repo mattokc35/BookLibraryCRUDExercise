@@ -25,6 +25,8 @@ export const BookCard = styled.div`
 export const BookTitle = styled.h4`
   margin-bottom: 2px;
   font-style: italic;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 export const Button = styled.button`

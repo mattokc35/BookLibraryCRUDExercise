@@ -81,7 +81,9 @@ const BookForm: React.FC<BookFormProps> = ({
     //validate year
     const parsedYear = parseInt(year, 10);
     if (parsedYear > 2024 || parsedYear < 0) {
-      setYearError("Year must be greater than 0 and less than 2024");
+      setYearError(
+        "Year must be greater than or equal to 0 and less than or equal 2024"
+      );
       return;
     } else {
       setYearError("");
