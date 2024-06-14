@@ -24,7 +24,13 @@ const BookList: React.FC = () => {
   const [usePagination, setUsePagination] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<
-    "titleAsc" | "titleDesc" | "authorAsc" | "authorDesc" | ""
+    | "titleAsc"
+    | "titleDesc"
+    | "authorAsc"
+    | "authorDesc"
+    | "publishYearOldToNew"
+    | "publishYearNewToOld"
+    | ""
   >("");
   const navigate = useNavigate();
 
@@ -58,6 +64,10 @@ const BookList: React.FC = () => {
       sortedBooks.sort((a, b) => a.author.localeCompare(b.author));
     } else if (sortBy === "authorDesc") {
       sortedBooks.sort((a, b) => b.author.localeCompare(a.author));
+    } else if (sortBy === "publishYearOldToNew") {
+      sortedBooks.sort((a, b) => a.year - b.year);
+    } else if (sortBy === "publishYearNewToOld") {
+      sortedBooks.sort((a, b) => b.year - a.year);
     }
     setFilteredBooks(sortedBooks);
   }, [sortBy]);

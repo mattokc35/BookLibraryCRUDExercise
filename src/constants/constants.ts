@@ -9,8 +9,10 @@ export const booksPerPageOptions = [
 ];
 
 export const sortOptions = [
-  { value: "titleAsc", label: "Title A-Z" },
-  { value: "titleDesc", label: "Title Z-A" },
-  { value: "authorAsc", label: "Author A-Z" },
-  { value: "authorDesc", label: "Author Z-A" },
+  { value: "titleAsc", label: "Title (A-Z)" },
+  { value: "titleDesc", label: "Title (Z-A)" },
+  { value: "authorAsc", label: "Author (A-Z)" },
+  { value: "authorDesc", label: "Author (Z-A)" },
+  { value: "publishYearOldToNew", label: "Year Published (Oldest-Newest)" },
+  { value: "publishYearNewToOld", label: "Year Published (Newest-Oldest)" },
 ];
