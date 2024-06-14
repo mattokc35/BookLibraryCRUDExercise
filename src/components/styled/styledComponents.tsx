@@ -18,7 +18,7 @@ export const BookCard = styled.div`
   text-align: center;
 
   &:hover {
-    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.2);
   }
 `;
 
