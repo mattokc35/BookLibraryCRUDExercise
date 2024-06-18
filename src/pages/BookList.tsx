@@ -4,12 +4,14 @@ import Select from "react-select";
 import {
   Button,
   BookGridContainer,
-  BookListContainer,
   Title,
   PaginationButton,
   PaginationContainer,
   ButtonContainer,
+  FilterOptionsContainer,
+  FixedTopMenuBar,
 } from "../components/styled/styledComponents";
+import { Genre } from "../types/Types";
 import useStore from "../store";
 import Book from "../components/Book";
 import { booksPerPageOptions, sortOptions } from "../constants/constants";
@@ -17,7 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const BookList: React.FC = () => {
-  const { books, fetchBooks, deleteBook, fetchGenres } = useStore();
+  const { books, fetchBooks, deleteBook, fetchGenres, genres } = useStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage, setBooksPerPage] = useState(12);
   const [filteredBooks, setFilteredBooks] = useState([...books].reverse());
@@ -32,6 +34,7 @@ const BookList: React.FC = () => {
     | "publishYearNewToOld"
     | ""
   >("");
+  const [selectedGenres, setSelectedGenres] = useState<Genre[]>();
   const navigate = useNavigate();
 
   //fetch books and genres
@@ -72,6 +75,21 @@ const BookList: React.FC = () => {
     setFilteredBooks(sortedBooks);
   }, [sortBy]);
 
+  // Genre filter useEffect
+  useEffect(() => {
+    console.log("select genre use effect");
+    if (selectedGenres && selectedGenres.length > 0) {
+      const genreFilteredBooks = books.filter((book) =>
+        selectedGenres.some((genre) =>
+          book.genre.some((bookGenre) => bookGenre.value === genre.value)
+        )
+      );
+      setFilteredBooks(genreFilteredBooks);
+    } else {
+      setFilteredBooks([...books].reverse());
+    }
+  }, [selectedGenres, books]);
+
   //pagination logic
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -99,9 +117,13 @@ const BookList: React.FC = () => {
     }
   };
 
+  const handleGenreChange = (selectedOptions: any) => {
+    setSelectedGenres(selectedOptions || []);
+  };
+
   return (
     <>
-      <BookListContainer>
+      <FixedTopMenuBar>
         <Title>Book Collection</Title>
         <ButtonContainer>
           <Button onClick={() => navigate("/add")}>
@@ -112,29 +134,30 @@ const BookList: React.FC = () => {
             {usePagination ? "Disable Pagination" : "Enable Pagination"}
           </Button>
         </ButtonContainer>
-        {usePagination && (
-          <ButtonContainer>
-            <label htmlFor="booksPerPage">Books per page: </label>
-            <Select
-              id="booksPerPage"
-              value={booksPerPageOptions.find(
-                (option) => option.value === booksPerPage
-              )}
-              onChange={handleBooksPerPageChange}
-              options={booksPerPageOptions}
-            />
-          </ButtonContainer>
-        )}
-        <ButtonContainer>
-          <label htmlFor="search">Search For Title or Author: </label>
+        <FilterOptionsContainer>
+          {usePagination && (
+            <>
+              <label htmlFor="booksPerPage">Books per page: </label>
+              <Select
+                id="booksPerPage"
+                value={booksPerPageOptions.find(
+                  (option) => option.value === booksPerPage
+                )}
+                onChange={handleBooksPerPageChange}
+                options={booksPerPageOptions}
+              />
+            </>
+          )}
+          <label htmlFor="search">Search for Title or Author:</label>
           <input
             type="text"
             id="search"
+            style={{ height: "2rem", width: "9.5rem" }}
             value={searchQuery}
+            placeholder="Search for Title or Author"
             onChange={handleSearchChange}
           />
-        </ButtonContainer>
-        <ButtonContainer>
+
           <label htmlFor="sort">Sort by: </label>
           <Select
             id="sort"
@@ -146,15 +169,30 @@ const BookList: React.FC = () => {
             onChange={handleSortChange}
             options={sortOptions}
             isClearable={true}
-            placeholder="Select sorting option..."
+            placeholder="Select option..."
           />
-        </ButtonContainer>
-        <BookGridContainer>
-          {currentBooks.map((book) => (
+
+          <label htmlFor="filterGenres">Filter By Genres: </label>
+          <Select
+            id="filterGenres"
+            isMulti
+            options={genres.map((g) => ({ value: g.value, label: g.label }))}
+            value={selectedGenres}
+            onChange={handleGenreChange}
+            placeholder="Select Genres"
+          />
+        </FilterOptionsContainer>
+      </FixedTopMenuBar>
+      <BookGridContainer>
+        {filteredBooks.length > 0 ? (
+          currentBooks.map((book) => (
             <Book key={book.id} book={book} onDelete={deleteBook} />
-          ))}
-        </BookGridContainer>
-      </BookListContainer>
+          ))
+        ) : (
+          <h2>No Books Found!</h2>
+        )}
+      </BookGridContainer>
+
       {usePagination && (
         <PaginationContainer>
           {Array.from({

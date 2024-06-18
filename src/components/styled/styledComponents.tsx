@@ -53,21 +53,42 @@ export const ButtonContainer = styled.div`
   margin-bottom: 15px;
 `;
 
+export const FixedTopMenuBar = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(to bottom, white, #aedbf2);
+  padding: 5px;
+`;
+
+export const FilterOptionsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+
+    label {
+      width: 25%;
+      text-align: center;
+    }
+  }
+`;
+
 export const BookGridContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
-`;
-
-export const BookListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
 `;
 
 export const FormContainer = styled.div`
