@@ -8,20 +8,20 @@ import {
   ErrorMessage,
   ButtonContainer,
 } from "./styled/styledComponents";
-import { Genre } from "../types/Types";
+import { AuthorName, Genre } from "../types/Types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 interface BookFormProps {
   initialValues?: {
     title: string;
-    author: string;
+    author: AuthorName;
     year: string;
     genre: Genre[];
   };
   onSubmit: (formData: {
     title: string;
-    author: string;
+    author: AuthorName;
     year: number;
     genre: Genre[];
   }) => void;
@@ -32,7 +32,7 @@ interface BookFormProps {
 const BookForm: React.FC<BookFormProps> = ({
   initialValues = {
     title: "",
-    author: "",
+    author: { firstName: "", lastName: "" },
     year: "",
     genre: [],
   },
@@ -41,7 +41,7 @@ const BookForm: React.FC<BookFormProps> = ({
   genres,
 }) => {
   const [title, setTitle] = useState(initialValues.title);
-  const [author, setAuthor] = useState(initialValues.author);
+  const [author, setAuthor] = useState<AuthorName>(initialValues.author);
   const [year, setYear] = useState(initialValues.year);
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>(
     initialValues.genre
@@ -73,9 +73,11 @@ const BookForm: React.FC<BookFormProps> = ({
       setTitleError("");
     }
 
-    //validate author name length
-    if (author.length > 30) {
-      setAuthorError("Author name cannot exceed 30 characters");
+    // Validate author name length
+    if (author.firstName.length > 30 || author.lastName.length > 30) {
+      setAuthorError(
+        "First name and last name cannot exceed 30 characters each"
+      );
       return;
     } else {
       setAuthorError("");
@@ -110,7 +112,7 @@ const BookForm: React.FC<BookFormProps> = ({
 
     //reset form fields after submission
     setTitle("");
-    setAuthor("");
+    setAuthor({ firstName: "", lastName: "" });
     setYear("");
     setSelectedGenres([]);
 
@@ -137,12 +139,25 @@ const BookForm: React.FC<BookFormProps> = ({
           {titleError && <ErrorMessage>{titleError}</ErrorMessage>}
         </FormGroup>
         <FormGroup>
-          <label htmlFor="author">Author:</label>
+          <label htmlFor="firstName">First Name:</label>
           <input
             type="text"
-            id="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            id="firstName"
+            value={author.firstName}
+            onChange={(e) =>
+              setAuthor({ ...author, firstName: e.target.value })
+            }
+            required
+          />
+          {authorError && <ErrorMessage>{authorError}</ErrorMessage>}
+        </FormGroup>
+        <FormGroup>
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            value={author.lastName}
+            onChange={(e) => setAuthor({ ...author, lastName: e.target.value })}
             required
           />
           {authorError && <ErrorMessage>{authorError}</ErrorMessage>}

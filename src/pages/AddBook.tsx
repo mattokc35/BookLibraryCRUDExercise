@@ -1,7 +1,7 @@
 import React from "react";
 import useStore from "../store";
 import BookForm from "../components/BookForm";
-import { Genre } from "../types/Types";
+import { AuthorName, Genre } from "../types/Types";
 import { Title } from "../components/styled/styledComponents";
 
 const AddBook: React.FC = () => {
@@ -10,7 +10,7 @@ const AddBook: React.FC = () => {
 
   const handleSubmit = (formData: {
     title: string;
-    author: string;
+    author: AuthorName;
     year: number;
     genre: Genre[];
   }) => {

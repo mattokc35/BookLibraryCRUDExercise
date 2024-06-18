@@ -20,8 +20,20 @@ describe("API Functions", () => {
   describe("fetchBooks", () => {
     it("fetches books successfully", async () => {
       const mockBooks: Book[] = [
-        { id: "1", title: "Book 1", author: "Author 1", year: 2020, genre: [] },
-        { id: "2", title: "Book 2", author: "Author 2", year: 2021, genre: [] },
+        {
+          id: "1",
+          title: "Book 1",
+          author: { firstName: "Author", lastName: "1" },
+          year: 2020,
+          genre: [],
+        },
+        {
+          id: "2",
+          title: "Book 2",
+          author: { firstName: "Author", lastName: "2" },
+          year: 2021,
+          genre: [],
+        },
       ];
       mockFetch.mockResolvedValueOnce({
         ok: true,
@@ -47,7 +59,7 @@ describe("API Functions", () => {
     it("adds a book successfully", async () => {
       const newBook: Omit<Book, "id"> = {
         title: "New Book",
-        author: "New Author",
+        author: { firstName: "New", lastName: "Author" },
         year: 2022,
         genre: [],
       };
@@ -69,7 +81,7 @@ describe("API Functions", () => {
     it("throws an error when adding book fails", async () => {
       const newBook: Omit<Book, "id"> = {
         title: "New Book",
-        author: "New Author",
+        author: { firstName: "New", lastName: "Author" },
         year: 2022,
         genre: [],
       };
@@ -95,7 +107,7 @@ describe("API Functions", () => {
       const updatedBook: Book = {
         id: "1",
         title: "Updated Book",
-        author: "Updated Author",
+        author: { firstName: "Updated", lastName: "Author" },
         year: 2023,
         genre: [],
       };
@@ -116,7 +128,7 @@ describe("API Functions", () => {
       const updatedBook: Book = {
         id: "1",
         title: "Updated Book",
-        author: "Updated Author",
+        author: { firstName: "Updated", lastName: "Author" },
         year: 2023,
         genre: [],
       };

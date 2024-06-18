@@ -11,7 +11,7 @@ const genres: Genre[] = [
 
 const initialValues = {
   title: "Sample Book Title",
-  author: "John Doe",
+  author: { firstName: "John", lastName: "Doe" },
   year: "2022",
   genre: [genres[0]],
 };

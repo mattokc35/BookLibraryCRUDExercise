@@ -1,7 +1,7 @@
 export interface Book {
   id: string;
   title: string;
-  author: string;
+  author: AuthorName;
   year: number;
   genre: Genre[];
 }
@@ -9,4 +9,9 @@ export interface Book {
 export interface Genre {
   value: string;
   label: string;
+}
+
+export interface AuthorName {
+  firstName: string;
+  lastName: string;
 }

@@ -22,7 +22,7 @@ let books = [
   {
     id: "1",
     title: "Harry Potter and the Philosopher's Stone",
-    author: "J.K. Rowling",
+    author: { firstName: "J.K.", lastName: "Rowling" },
     year: 1997,
     genre: [
       { value: "fantasy", label: "Fantasy" },
@@ -32,14 +32,14 @@ let books = [
   {
     id: "2",
     title: "Dune",
-    author: "Frank Herbert",
+    author: { firstName: "Frank", lastName: "Herbert" },
     year: 1965,
     genre: [{ value: "science_fiction", label: "Science Fiction" }],
   },
   {
     id: "3",
     title: "Gone Girl",
-    author: "Gillian Flynn",
+    author: { firstName: "Gillian", lastName: "Flynn" },
     year: 2012,
     genre: [
       { value: "mystery", label: "Mystery" },
@@ -49,7 +49,7 @@ let books = [
   {
     id: "4",
     title: "Pride and Prejudice",
-    author: "Jane Austen",
+    author: { firstName: "Jane", lastName: "Austen" },
     year: 1813,
     genre: [
       { value: "romance", label: "Romance" },
@@ -59,7 +59,7 @@ let books = [
   {
     id: "5",
     title: "The Night Circus",
-    author: "Erin Morgenstern",
+    author: { firstName: "Erin", lastName: "Morgenstern" },
     year: 2011,
     genre: [
       { value: "fantasy", label: "Fantasy" },
@@ -69,21 +69,21 @@ let books = [
   {
     id: "6",
     title: "The Book Thief",
-    author: "Markus Zusak",
+    author: { firstName: "Markus", lastName: "Zusak" },
     year: 2005,
     genre: [{ value: "historical_fiction", label: "Historical Fiction" }],
   },
   {
     id: "7",
     title: "It",
-    author: "Stephen King",
+    author: { firstName: "Stephen", lastName: "King" },
     year: 1986,
     genre: [{ value: "horror", label: "Horror" }],
   },
   {
     id: "8",
     title: "The Hunger Games",
-    author: "Suzanne Collins",
+    author: { firstName: "Suzanne", lastName: "Collins" },
     year: 2008,
     genre: [
       { value: "young_adult", label: "Young Adult (YA)" },
@@ -93,21 +93,21 @@ let books = [
   {
     id: "9",
     title: "The Catcher in the Rye",
-    author: "J.D. Salinger",
+    author: { firstName: "J.D.", lastName: "Salinger" },
     year: 1951,
     genre: [{ value: "literary_fiction", label: "Literary Fiction" }],
   },
   {
     id: "10",
     title: "Sapiens: A Brief History of Humankind",
-    author: "Yuval Noah Harari",
+    author: { firstName: "Yuval Noah", lastName: "Harari" },
     year: 2011,
     genre: [{ value: "non_fiction", label: "Non-fiction" }],
   },
   {
     id: "11",
     title: "Steve Jobs",
-    author: "Walter Isaacson",
+    author: { firstName: "Walter", lastName: "Isaacson" },
     year: 2011,
     genre: [
       { value: "biography_autobiography", label: "Biography/Autobiography" },
@@ -116,14 +116,18 @@ let books = [
   {
     id: "12",
     title: "The Power of Now: A Guide to Spiritual Enlightenment",
-    author: "Eckhart Tolle",
+    author: { firstName: "Eckhart", lastName: "Tolle" },
     year: 1997,
     genre: [{ value: "self_help", label: "Self-help" }],
   },
   {
     id: "13",
     title: "Good Omens",
-    author: "Neil Gaiman & Terry Pratchett",
+    author: {
+      firstName: "Neil",
+      lastName: "Gaiman & Terry",
+      lastName: "Pratchett",
+    },
     year: 1990,
     genre: [
       { value: "humor", label: "Humor" },
@@ -133,7 +137,7 @@ let books = [
   {
     id: "14",
     title: "Brave New World",
-    author: "Aldous Huxley",
+    author: { firstName: "Aldous", lastName: "Huxley" },
     year: 1932,
     genre: [
       { value: "dystopian", label: "Dystopian" },
@@ -143,7 +147,7 @@ let books = [
   {
     id: "15",
     title: "The Hobbit",
-    author: "J.R.R. Tolkien",
+    author: { firstName: "J.R.R.", lastName: "Tolkien" },
     year: 1937,
     genre: [
       { value: "fantasy", label: "Fantasy" },
@@ -153,7 +157,7 @@ let books = [
   {
     id: "16",
     title: "The Girl with the Dragon Tattoo",
-    author: "Stieg Larsson",
+    author: { firstName: "Stieg", lastName: "Larsson" },
     year: 2005,
     genre: [
       { value: "mystery", label: "Mystery" },
@@ -163,7 +167,7 @@ let books = [
   {
     id: "17",
     title: "The Fault in Our Stars",
-    author: "John Green",
+    author: { firstName: "John", lastName: "Green" },
     year: 2012,
     genre: [
       { value: "young_adult", label: "Young Adult (YA)" },
@@ -173,14 +177,14 @@ let books = [
   {
     id: "18",
     title: "The Road",
-    author: "Cormac McCarthy",
+    author: { firstName: "Cormac", lastName: "McCarthy" },
     year: 2006,
     genre: [{ value: "dystopian", label: "Dystopian" }],
   },
   {
     id: "19",
     title: "Treasure Island",
-    author: "Robert Louis Stevenson",
+    author: { firstName: "Robert Louis", lastName: "Stevenson" },
     year: 1883,
     genre: [
       { value: "adventure", label: "Adventure" },
@@ -190,7 +194,7 @@ let books = [
   {
     id: "20",
     title: "The Martian",
-    author: "Andy Weir",
+    author: { firstName: "Andy", lastName: "Weir" },
     year: 2011,
     genre: [{ value: "science_fiction", label: "Science Fiction" }],
   },

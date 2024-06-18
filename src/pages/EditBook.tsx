@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import useStore from "../store";
-import { Genre } from "../types/Types";
+import { AuthorName, Genre } from "../types/Types";
 import BookForm from "../components/BookForm";
 import { Title } from "../components/styled/styledComponents";
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ const EditBook: React.FC = () => {
 
   const handleSubmit = (formData: {
     title: string;
-    author: string;
+    author: AuthorName;
     year: number;
     genre: Genre[];
   }) => {

@@ -15,7 +15,7 @@ describe("Book Component", () => {
   const mockBook: BookType = {
     id: "1",
     title: "Test Book",
-    author: "Test Author",
+    author: { firstName: "Test", lastName: "Author" },
     year: 2023,
     genre: [
       { value: "fiction", label: "Fiction" },
@@ -38,7 +38,7 @@ describe("Book Component", () => {
     );
 
     expect(screen.getByText(mockBook.title)).toBeInTheDocument();
-    expect(screen.getByText(mockBook.author)).toBeInTheDocument();
+    expect(screen.getByText(mockBook.author.firstName)).toBeInTheDocument();
     expect(screen.getByText(mockBook.year)).toBeInTheDocument();
     expect(screen.getByText(mockBook.genre[1].label)).toBeInTheDocument();
   });

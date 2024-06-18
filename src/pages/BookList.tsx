@@ -56,7 +56,12 @@ const BookList: React.FC = () => {
         .filter(
           (book) =>
             book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            book.author.toLowerCase().includes(searchQuery.toLowerCase())
+            book.author.lastName
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            book.author.firstName
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
         )
     );
   }, [books, searchQuery]);
@@ -69,9 +74,13 @@ const BookList: React.FC = () => {
     } else if (sortBy === "titleDesc") {
       sortedBooks.sort((a, b) => b.title.localeCompare(a.title));
     } else if (sortBy === "authorAsc") {
-      sortedBooks.sort((a, b) => a.author.localeCompare(b.author));
+      sortedBooks.sort((a, b) =>
+        a.author.lastName.localeCompare(b.author.lastName)
+      );
     } else if (sortBy === "authorDesc") {
-      sortedBooks.sort((a, b) => b.author.localeCompare(a.author));
+      sortedBooks.sort((a, b) =>
+        b.author.lastName.localeCompare(a.author.lastName)
+      );
     } else if (sortBy === "publishYearOldToNew") {
       sortedBooks.sort((a, b) => a.year - b.year);
     } else if (sortBy === "publishYearNewToOld") {

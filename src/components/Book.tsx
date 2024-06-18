@@ -48,7 +48,8 @@ const Book: React.FC<BookProps> = ({ book, onDelete }) => {
         <>
           <BookTitle>{book.title}</BookTitle>
           <p>
-            <strong>Author:</strong> {book.author}
+            <strong>Author:</strong>{" "}
+            {book.author.firstName + " " + book.author.lastName}
           </p>
           <p>
             <strong>Year Published:</strong> {book.year}
