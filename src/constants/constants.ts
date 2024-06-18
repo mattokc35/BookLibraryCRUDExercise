@@ -12,7 +12,7 @@ export const sortOptions = [
   { value: "titleAsc", label: "Title (A-Z)" },
   { value: "titleDesc", label: "Title (Z-A)" },
   { value: "authorAsc", label: "Author last name (A-Z)" },
-  { value: "authorDesc", label: "Author last name (A-Z)" },
+  { value: "authorDesc", label: "Author last name (Z-A)" },
   { value: "publishYearOldToNew", label: "Year published (oldest)" },
   { value: "publishYearNewToOld", label: "Year published (newest)" },
 ];

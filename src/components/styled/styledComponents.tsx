@@ -75,7 +75,12 @@ export const FilterOptionsContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 0.1rem;
-
+    .dropdown {
+      width: 80%;
+    }
+    input {
+      width: 78%;
+    }
     label {
       width: 100%;
       text-align: center;
@@ -94,15 +99,18 @@ export const BookGridContainer = styled.div`
 export const FormContainer = styled.div`
   margin: 0 auto;
   padding: 40px;
-  width: 800px;
+  width: 80%;
   border: 1px solid #ccc;
   background-color: #f5f5f5;
   border-radius: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 900px) {
-    width: 320px;
+    width: 90%;
     padding: 20px;
+    border: none;
+    border-radius: 0px;
+    box-shadow: 0px;
   }
 `;
 
@@ -125,12 +133,13 @@ export const FormGroup = styled.div`
   }
 
   @media (max-width: 900px) {
+    margin-bottom: 40px;
     label {
-      font-size: 14px;
+      font-size: 18px;
     }
 
     input {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
 `;
@@ -172,6 +181,7 @@ export const PaginationContainer = styled.div`
   position: relative;
   bottom: 20px;
   left: 50%;
+  margin-top: 10px;
   transform: translateX(-50%);
   display: flex;
   justify-content: center;

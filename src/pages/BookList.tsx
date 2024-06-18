@@ -39,84 +39,76 @@ const BookList: React.FC = () => {
     | ""
   >("");
   const [selectedGenres, setSelectedGenres] = useState<Genre[]>();
-  const [isMenuBarOpen, setIsMenuBarOpen] = useState(true); // State to track menu bar visibility
+  const [isMenuBarOpen, setIsMenuBarOpen] = useState(true);
   const navigate = useNavigate();
 
-  // Fetch books and genres on component mount
+  //Fetch books and genres on component mount
   useEffect(() => {
     fetchBooks();
     fetchGenres();
   }, []);
 
-  // Search query useEffect
+  //Filtering and sorting logic
   useEffect(() => {
-    setFilteredBooks(
-      [...books]
-        .reverse()
-        .filter(
-          (book) =>
-            book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            book.author.lastName
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase()) ||
-            book.author.firstName
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
-        )
-    );
-  }, [books, searchQuery]);
+    let updatedBooks = [...books];
 
-  // Sorting useEffect
-  useEffect(() => {
-    const sortedBooks = [...filteredBooks];
-    if (sortBy === "titleAsc") {
-      sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortBy === "titleDesc") {
-      sortedBooks.sort((a, b) => b.title.localeCompare(a.title));
-    } else if (sortBy === "authorAsc") {
-      sortedBooks.sort((a, b) =>
-        a.author.lastName.localeCompare(b.author.lastName)
+    //Apply search query
+    if (searchQuery) {
+      updatedBooks = updatedBooks.filter(
+        (book) =>
+          book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          book.author.lastName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          book.author.firstName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
       );
-    } else if (sortBy === "authorDesc") {
-      sortedBooks.sort((a, b) =>
-        b.author.lastName.localeCompare(a.author.lastName)
-      );
-    } else if (sortBy === "publishYearOldToNew") {
-      sortedBooks.sort((a, b) => a.year - b.year);
-    } else if (sortBy === "publishYearNewToOld") {
-      sortedBooks.sort((a, b) => b.year - a.year);
     }
-    setFilteredBooks(sortedBooks);
-  }, [sortBy]);
 
-  // Genre filter useEffect
-  useEffect(() => {
+    //Apply genre filter
     if (selectedGenres && selectedGenres.length > 0) {
-      const genreFilteredBooks = books.filter((book) =>
+      updatedBooks = updatedBooks.filter((book) =>
         selectedGenres.some((genre) =>
           book.genre.some((bookGenre) => bookGenre.value === genre.value)
         )
       );
-      setFilteredBooks(genreFilteredBooks);
-    } else {
-      setFilteredBooks([...books].reverse());
     }
-  }, [selectedGenres, books]);
 
-  // Pagination logic
+    //Apply sorting
+    if (sortBy === "titleAsc") {
+      updatedBooks.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortBy === "titleDesc") {
+      updatedBooks.sort((a, b) => b.title.localeCompare(a.title));
+    } else if (sortBy === "authorAsc") {
+      updatedBooks.sort((a, b) =>
+        a.author.lastName.localeCompare(b.author.lastName)
+      );
+    } else if (sortBy === "authorDesc") {
+      updatedBooks.sort((a, b) =>
+        b.author.lastName.localeCompare(a.author.lastName)
+      );
+    } else if (sortBy === "publishYearOldToNew") {
+      updatedBooks.sort((a, b) => a.year - b.year);
+    } else if (sortBy === "publishYearNewToOld") {
+      updatedBooks.sort((a, b) => b.year - a.year);
+    }
+
+    setFilteredBooks(updatedBooks);
+  }, [books, searchQuery, selectedGenres, sortBy]);
+
+  //Pagination logic
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = usePagination
     ? filteredBooks.slice(indexOfFirstBook, indexOfLastBook)
     : filteredBooks;
 
-  // Handle change functions
+  //Handle change functions
   const handleBooksPerPageChange = (selectedOption: any) => {
     setBooksPerPage(Number(selectedOption.value));
     setCurrentPage(1);
   };
-
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -134,6 +126,8 @@ const BookList: React.FC = () => {
   const handleGenreChange = (selectedOptions: any) => {
     setSelectedGenres(selectedOptions || []);
   };
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const toggleMenuBar = () => {
     setIsMenuBarOpen(!isMenuBarOpen);
@@ -172,7 +166,7 @@ const BookList: React.FC = () => {
               <input
                 type="text"
                 id="search"
-                style={{ height: "2rem", width: "9.5rem" }}
+                style={{ height: "2rem" }}
                 value={searchQuery}
                 placeholder="Search for Title or Author"
                 onChange={handleSearchChange}
@@ -180,6 +174,7 @@ const BookList: React.FC = () => {
 
               <label htmlFor="sort">Sort by: </label>
               <Select
+                className="dropdown"
                 id="sort"
                 value={
                   sortBy
@@ -196,6 +191,7 @@ const BookList: React.FC = () => {
               <Select
                 id="filterGenres"
                 isMulti
+                className="dropdown"
                 options={genres.map((g) => ({
                   value: g.value,
                   label: g.label,
