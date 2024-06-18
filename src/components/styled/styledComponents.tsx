@@ -77,7 +77,7 @@ export const FilterOptionsContainer = styled.div`
     gap: 0.1rem;
 
     label {
-      width: 25%;
+      width: 100%;
       text-align: center;
     }
   }
