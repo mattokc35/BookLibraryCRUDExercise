@@ -101,7 +101,6 @@ export const FormContainer = styled.div`
   padding: 40px;
   width: 80%;
   border: 1px solid #ccc;
-  background-color: #f5f5f5;
   border-radius: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
@@ -139,7 +138,7 @@ export const FormGroup = styled.div`
     }
 
     input {
-      font-size: 20px;
+      font-size: 16px;
     }
   }
 `;
