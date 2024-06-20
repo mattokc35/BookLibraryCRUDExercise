@@ -12,23 +12,29 @@ const EditBook: React.FC = () => {
 
   const book = books.find((b) => b.id === id);
 
-  const handleSubmit = (formData: {
+  const handleSubmit = async (formData: {
     title: string;
     author: AuthorName;
     year: number;
     genre: Genre[];
-  }) => {
+  }): Promise<boolean> => {
     if (id) {
-      updateBook({ id, ...formData });
+      try {
+        await updateBook({ id, ...formData });
+        return true;
+      } catch (error) {
+        return false;
+      }
     } else {
       console.error("Cannot update book: id is undefined.");
+      return false;
     }
   };
 
   if (!book) {
     return (
       <>
-        <div role="alert">No Book Found.</div>
+        <h2 role="alert">No Book Found.</h2>
         <Link to="/" aria-label="Go back home">
           Click here to go home
         </Link>
@@ -37,7 +43,7 @@ const EditBook: React.FC = () => {
   }
 
   return (
-    <div>
+    <>
       <Title>Edit Book</Title>
       <BookForm
         initialValues={{
@@ -50,7 +56,7 @@ const EditBook: React.FC = () => {
         submitButtonLabel="Update Book"
         genres={genres}
       />
-    </div>
+    </>
   );
 };
 

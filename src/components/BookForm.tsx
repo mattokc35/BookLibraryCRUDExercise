@@ -11,6 +11,7 @@ import {
 import { AuthorName, Genre } from "../types/Types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import SubmissionStatus from "./SubmissionStatus";
 
 interface BookFormProps {
   initialValues?: {
@@ -24,7 +25,7 @@ interface BookFormProps {
     author: AuthorName;
     year: number;
     genre: Genre[];
-  }) => void;
+  }) => Promise<boolean>;
   submitButtonLabel: string;
   genres: Genre[];
 }
@@ -53,6 +54,11 @@ const BookForm: React.FC<BookFormProps> = ({
   const [yearError, setYearError] = useState("");
   const [genreError, setGenreError] = useState("");
 
+  //submission status
+  const [submissionStatus, setSubmissionStatus] = useState<
+    "idle" | "Submitting..." | "Success" | "Error"
+  >("idle");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,12 +68,15 @@ const BookForm: React.FC<BookFormProps> = ({
     setSelectedGenres(initialValues.genre);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setSubmissionStatus("Submitting...");
 
     //validate title length
     if (title.length > 50) {
       setTitleError("Title cannot exceed 50 characters");
+      setSubmissionStatus("Error");
       return;
     } else {
       setTitleError("");
@@ -78,6 +87,7 @@ const BookForm: React.FC<BookFormProps> = ({
       setAuthorError(
         "First name and last name cannot exceed 30 characters each"
       );
+      setSubmissionStatus("Error");
       return;
     } else {
       setAuthorError("");
@@ -89,6 +99,7 @@ const BookForm: React.FC<BookFormProps> = ({
       setYearError(
         "Year must be greater than or equal to 0 and less than or equal 2024"
       );
+      setSubmissionStatus("Error");
       return;
     } else {
       setYearError("");
@@ -97,27 +108,39 @@ const BookForm: React.FC<BookFormProps> = ({
     //validate genres
     if (selectedGenres.length > 5) {
       setGenreError("Select up to 5 genres");
+      setSubmissionStatus("Error");
       return;
     } else {
       setGenreError("");
     }
 
-    //if no validation errors, submit the form
-    onSubmit({
-      title,
-      author,
-      year: parsedYear,
-      genre: selectedGenres,
-    });
-
-    //reset form fields after submission
-    setTitle("");
-    setAuthor({ firstName: "", lastName: "" });
-    setYear("");
-    setSelectedGenres([]);
-
-    //navigate to home page after submission
-    navigate("/");
+    //if no validation errors, try to submit the form
+    try {
+      const isSuccess = await onSubmit({
+        title,
+        author,
+        year: parsedYear,
+        genre: selectedGenres,
+      });
+      console.log("is Success ", isSuccess);
+      if (isSuccess) {
+        setSubmissionStatus("Success");
+        //reset form fields after successful submission
+        setTitle("");
+        setAuthor({ firstName: "", lastName: "" });
+        setYear("");
+        setSelectedGenres([]);
+        //navigate to home page after 1.5 seconds
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      } else {
+        setSubmissionStatus("Error");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmissionStatus("Error");
+    }
   };
 
   const handleGenreChange = (selectedOptions: any) => {
@@ -181,6 +204,7 @@ const BookForm: React.FC<BookFormProps> = ({
           <label htmlFor="genre">Genre:</label>
           <Select
             id="genre"
+            className="dropdown"
             isMulti
             options={genres.map((g) => ({ value: g.value, label: g.label }))}
             value={selectedGenres}
@@ -205,6 +229,9 @@ const BookForm: React.FC<BookFormProps> = ({
             Cancel
           </Button>
         </ButtonContainer>
+        <div style={{ textAlign: "center" }}>
+          <SubmissionStatus status={submissionStatus} />
+        </div>
       </form>
     </FormContainer>
   );

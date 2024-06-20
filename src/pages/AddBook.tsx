@@ -8,13 +8,19 @@ const AddBook: React.FC = () => {
   const addBook = useStore((state) => state.addBook);
   const { genres } = useStore();
 
-  const handleSubmit = (formData: {
+  const handleSubmit = async (formData: {
     title: string;
     author: AuthorName;
     year: number;
     genre: Genre[];
-  }) => {
-    addBook(formData);
+  }): Promise<boolean> => {
+    try {
+      await addBook(formData);
+      return true;
+    } catch (error) {
+      console.error("Error adding book:", error);
+      return false;
+    }
   };
 
   return (

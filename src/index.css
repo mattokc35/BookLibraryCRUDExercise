@@ -25,8 +25,14 @@ body {
   text-align: left;
   place-items: center;
   min-width: 320px;
-  background: linear-gradient(to bottom, white, #aedbf2);
+  background: #f5f5f5;
   min-height: 100vh;
+  border: none;
+}
+@media (max-width: 900px) {
+  body {
+    border: 8px solid #aedbf2;
+  }
 }
 
 @media (prefers-color-scheme: light) {

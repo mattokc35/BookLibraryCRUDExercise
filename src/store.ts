@@ -35,6 +35,7 @@ const useStore = create<StoreState>((set) => ({
       set((state) => ({ books: [...state.books, newBook] }));
     } catch (error) {
       console.error("Failed to add book:", error);
+      throw error;
     }
   },
   updateBook: async (book) => {
@@ -45,6 +46,7 @@ const useStore = create<StoreState>((set) => ({
       }));
     } catch (error) {
       console.error("Failed to update book:", error);
+      throw error;
     }
   },
   deleteBook: async (id: string) => {
@@ -55,6 +57,7 @@ const useStore = create<StoreState>((set) => ({
       }));
     } catch (error) {
       console.error("Failed to delete book:", error);
+      throw error;
     }
   },
   fetchGenres: async () => {

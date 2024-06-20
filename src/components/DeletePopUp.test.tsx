@@ -4,12 +4,12 @@ import "@testing-library/jest-dom";
 
 describe("DeletePopUp Component", () => {
   const onCloseMock = jest.fn();
-  const onConfirmMock = jest.fn();
+  const onDeleteMock = jest.fn();
   const title = "Test Book";
 
   beforeEach(() => {
     onCloseMock.mockClear();
-    onConfirmMock.mockClear();
+    onDeleteMock.mockClear();
   });
 
   it("renders with correct title and content when isOpen is true", () => {
@@ -17,7 +17,7 @@ describe("DeletePopUp Component", () => {
       <DeletePopUp
         isOpen={true}
         onClose={onCloseMock}
-        onConfirm={onConfirmMock}
+        onDelete={onDeleteMock}
         title={title}
       />
     );
@@ -35,7 +35,7 @@ describe("DeletePopUp Component", () => {
       <DeletePopUp
         isOpen={true}
         onClose={onCloseMock}
-        onConfirm={onConfirmMock}
+        onDelete={onDeleteMock}
         title={title}
       />
     );
@@ -46,12 +46,12 @@ describe("DeletePopUp Component", () => {
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 
-  it("calls onConfirm when Confirm button is clicked", () => {
+  it("calls onDelete when Confirm button is clicked", () => {
     render(
       <DeletePopUp
         isOpen={true}
         onClose={onCloseMock}
-        onConfirm={onConfirmMock}
+        onDelete={onDeleteMock}
         title={title}
       />
     );
@@ -59,6 +59,6 @@ describe("DeletePopUp Component", () => {
     const confirmButton = screen.getByText("Confirm");
     fireEvent.click(confirmButton);
 
-    expect(onConfirmMock).toHaveBeenCalledTimes(1);
+    expect(onDeleteMock).toHaveBeenCalledTimes(1);
   });
 });

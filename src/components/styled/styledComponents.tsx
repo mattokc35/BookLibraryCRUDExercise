@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BookCard = styled.div`
-  border: 2px solid #ccc;
+  border: 15px solid #aedbf2;
   border-radius: 50px;
   padding: 30px;
   margin-bottom: 16px;
@@ -31,18 +31,20 @@ export const BookTitle = styled.h3`
 `;
 
 export const Button = styled.button`
-  background-color: #1976d2;
-  color: #ffffff;
-  border: none;
+  background-color: #f5f5f5;
+  color: #black;
   padding: 7px 20px;
   border-radius: 40px;
+  border: 5px solid #aedbf2;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
 
   &:hover {
-    color: #1976d2;
-    background-color: #fff;
+    color: #aedbf2;
+    font-weight: 900;
+    font-size: 87%;
+    background-color: #black;
   }
 `;
 
@@ -58,8 +60,13 @@ export const FixedTopMenuBar = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(to bottom, white, #aedbf2);
+  background: #aedbf2;
   padding: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.2);
+  @media (max-width: 900px) {
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15), 0 0 7px rgba(0, 0, 0, 0.15);
+    border-radius: 0px 0px 20px 20px;
+  }
 `;
 
 export const FilterOptionsContainer = styled.div`
@@ -71,6 +78,7 @@ export const FilterOptionsContainer = styled.div`
   margin-bottom: 1rem;
   margin-top: 1rem;
   input {
+    border-radius: 10px;
     width: 16%;
   }
 
@@ -101,19 +109,24 @@ export const BookGridContainer = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  margin: 0 auto;
+  margin: auto;
   padding: 40px;
-  width: 80%;
-  border: 1px solid #ccc;
+  width: 40%;
+  border: 15px solid #aedbf2;
   border-radius: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
+  .dropdown {
+    width: 92%;
+  }
   @media (max-width: 900px) {
     width: 90%;
-    padding: 20px;
     border: none;
-    border-radius: 0px;
-    box-shadow: 0px;
+    .dropdown {
+      width: 94%;
+    }
+    border-radius: none;
+    box-shadow: none;
+    padding: 20px;
   }
 `;
 
@@ -128,7 +141,7 @@ export const FormGroup = styled.div`
   }
 
   input {
-    width: 100%;
+    width: 90%;
     padding: 5px;
     font-size: 25px;
     border: 1px solid #ccc;
@@ -139,6 +152,7 @@ export const FormGroup = styled.div`
     margin-bottom: 40px;
     label {
       font-size: 18px;
+      text-align: auto;
     }
 
     input {
@@ -161,10 +175,9 @@ export const PopupContainer = styled.div<{ isOpen: boolean }>`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: #f5f5f5;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1001;
 `;
 
@@ -176,8 +189,8 @@ export const PaginationButton = styled.button<{ currentPage: boolean }>`
   border: 1px solid #ccc;
   cursor: pointer;
   border-radius: 4px;
-  background-color: ${(props) => (props.currentPage ? "#007bff" : "white")};
-  color: ${(props) => (props.currentPage ? "white" : "#007bff")};
+  background-color: ${(props) => (props.currentPage ? "#aedbf2" : "white")};
+  color: ${(props) => (props.currentPage ? "black" : "#black")};
 `;
 
 export const PaginationContainer = styled.div`

@@ -24,9 +24,14 @@ const Book: React.FC<BookProps> = ({ book, onDelete }) => {
     setPopupOpen(true);
   };
 
-  const handleConfirmDelete = () => {
-    onDelete(book.id);
-    setPopupOpen(false);
+  const handleDeleteRequest = async (): Promise<boolean> => {
+    try {
+      await onDelete(book.id);
+      return true;
+    } catch (error) {
+      console.error("Error adding book:", error);
+      return false;
+    }
   };
 
   const handleCancel = () => {
@@ -41,7 +46,7 @@ const Book: React.FC<BookProps> = ({ book, onDelete }) => {
             <DeletePopUp
               isOpen={isPopupOpen}
               onClose={handleCancel}
-              onConfirm={handleConfirmDelete}
+              onDelete={handleDeleteRequest}
               title={`Delete "${book.title}"`}
             />
           </>
