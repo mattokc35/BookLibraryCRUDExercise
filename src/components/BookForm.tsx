@@ -136,7 +136,7 @@ const BookForm: React.FC<BookFormProps> = ({
             onChange={(e) => setTitle(e.target.value)}
             required
           />
-          {titleError && <ErrorMessage>{titleError}</ErrorMessage>}
+          {titleError && <ErrorMessage role="alert">{titleError}</ErrorMessage>}
         </FormGroup>
         <FormGroup>
           <label htmlFor="firstName">First Name:</label>
@@ -149,7 +149,9 @@ const BookForm: React.FC<BookFormProps> = ({
             }
             required
           />
-          {authorError && <ErrorMessage>{authorError}</ErrorMessage>}
+          {authorError && (
+            <ErrorMessage role="alert">{authorError}</ErrorMessage>
+          )}
         </FormGroup>
         <FormGroup>
           <label htmlFor="lastName">Last Name:</label>
@@ -160,7 +162,9 @@ const BookForm: React.FC<BookFormProps> = ({
             onChange={(e) => setAuthor({ ...author, lastName: e.target.value })}
             required
           />
-          {authorError && <ErrorMessage>{authorError}</ErrorMessage>}
+          {authorError && (
+            <ErrorMessage role="alert">{authorError}</ErrorMessage>
+          )}
         </FormGroup>
         <FormGroup>
           <label htmlFor="year">Year Published:</label>
@@ -171,7 +175,7 @@ const BookForm: React.FC<BookFormProps> = ({
             onChange={(e) => setYear(e.target.value)}
             required
           />
-          {yearError && <ErrorMessage>{yearError}</ErrorMessage>}
+          {yearError && <ErrorMessage role="alert">{yearError}</ErrorMessage>}
         </FormGroup>
         <FormGroup>
           <label htmlFor="genre">Genre:</label>
@@ -183,7 +187,7 @@ const BookForm: React.FC<BookFormProps> = ({
             onChange={handleGenreChange}
             required
           />
-          {genreError && <ErrorMessage>{genreError}</ErrorMessage>}
+          {genreError && <ErrorMessage role="alert">{genreError}</ErrorMessage>}
         </FormGroup>
         <ButtonContainer>
           <Button type="submit" aria-label={submitButtonLabel}>

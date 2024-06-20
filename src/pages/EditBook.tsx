@@ -28,7 +28,7 @@ const EditBook: React.FC = () => {
   if (!book) {
     return (
       <>
-        <div>No Book Found.</div>
+        <div role="alert">No Book Found.</div>
         <Link to="/" aria-label="Go back home">
           Click here to go home
         </Link>
