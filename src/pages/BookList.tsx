@@ -233,7 +233,7 @@ const BookList: React.FC = () => {
             <Book key={book.id} book={book} onDelete={deleteBook} />
           ))
         ) : (
-          <h2>No Books Found!</h2>
+          <h2 role="alert">No Books Found!</h2>
         )}
       </BookGridContainer>
 
