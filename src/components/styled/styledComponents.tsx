@@ -16,13 +16,14 @@ export const BookCard = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  height: 100%;
 
   &:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.2);
   }
 `;
 
-export const BookTitle = styled.h4`
+export const BookTitle = styled.h3`
   margin-bottom: 2px;
   font-style: italic;
   overflow-wrap: break-word;
@@ -69,6 +70,9 @@ export const FilterOptionsContainer = styled.div`
   gap: 1rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
+  input {
+    width: 16%;
+  }
 
   @media (max-width: 800px) {
     flex-direction: column;

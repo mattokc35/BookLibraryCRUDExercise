@@ -186,14 +186,17 @@ const BookForm: React.FC<BookFormProps> = ({
           {genreError && <ErrorMessage>{genreError}</ErrorMessage>}
         </FormGroup>
         <ButtonContainer>
-          <Button type="submit">
+          <Button type="submit" aria-label={submitButtonLabel}>
             <FontAwesomeIcon
               icon={faFloppyDisk}
               style={{ marginRight: "5px" }}
             />
             {submitButtonLabel}
           </Button>
-          <Button onClick={() => navigate("/")}>
+          <Button
+            onClick={() => navigate("/")}
+            aria-label="Cancel and go back to home"
+          >
             <FontAwesomeIcon icon={faBan} style={{ marginRight: "5px" }} />
             Cancel
           </Button>

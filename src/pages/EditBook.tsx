@@ -29,7 +29,9 @@ const EditBook: React.FC = () => {
     return (
       <>
         <div>No Book Found.</div>
-        <Link to="/">Click here to go home</Link>
+        <Link to="/" aria-label="Go back home">
+          Click here to go home
+        </Link>
       </>
     );
   }

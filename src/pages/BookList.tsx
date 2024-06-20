@@ -50,7 +50,7 @@ const BookList: React.FC = () => {
 
   //Filtering and sorting logic
   useEffect(() => {
-    let updatedBooks = [...books];
+    let updatedBooks = [...books].reverse();
 
     //Apply search query
     if (searchQuery) {
@@ -140,11 +140,19 @@ const BookList: React.FC = () => {
         {isMenuBarOpen && (
           <>
             <ButtonContainer>
-              <Button onClick={() => navigate("/add")}>
+              <Button
+                onClick={() => navigate("/add")}
+                aria-label="Add New Book"
+              >
                 <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
                 Add New Book
               </Button>
-              <Button onClick={() => setUsePagination(!usePagination)}>
+              <Button
+                onClick={() => setUsePagination(!usePagination)}
+                aria-label={
+                  usePagination ? "Disable Pagination" : "Enable Pagination"
+                }
+              >
                 {usePagination ? "Disable Pagination" : "Enable Pagination"}
               </Button>
             </ButtonContainer>
@@ -159,6 +167,7 @@ const BookList: React.FC = () => {
                     )}
                     onChange={handleBooksPerPageChange}
                     options={booksPerPageOptions}
+                    aria-label="Books per page selection"
                   />
                 </>
               )}
@@ -170,6 +179,7 @@ const BookList: React.FC = () => {
                 value={searchQuery}
                 placeholder="Search for Title or Author"
                 onChange={handleSearchChange}
+                aria-label="Search for Title or Author"
               />
 
               <label htmlFor="sort">Sort by: </label>
@@ -185,6 +195,7 @@ const BookList: React.FC = () => {
                 options={sortOptions}
                 isClearable={true}
                 placeholder="Select option..."
+                aria-label="Sort by selection"
               />
 
               <label htmlFor="filterGenres">Filter By Genres: </label>
@@ -199,6 +210,7 @@ const BookList: React.FC = () => {
                 value={selectedGenres}
                 onChange={handleGenreChange}
                 placeholder="Select Genres"
+                aria-label="Filter by Genres"
               />
             </FilterOptionsContainer>
           </>
@@ -212,6 +224,7 @@ const BookList: React.FC = () => {
             top: "10px",
             right: "10px",
           }}
+          aria-label={isMenuBarOpen ? "Collapse menu bar" : "Expand menu bar"}
         />
       </FixedTopMenuBar>
       <BookGridContainer>
@@ -233,6 +246,7 @@ const BookList: React.FC = () => {
               key={index}
               currentPage={currentPage === index + 1}
               onClick={() => paginate(index + 1)}
+              aria-label={`Go to page ${index + 1}`}
             >
               {index + 1}
             </PaginationButton>

@@ -34,48 +34,61 @@ const Book: React.FC<BookProps> = ({ book, onDelete }) => {
   };
 
   return (
-    <BookCard>
-      {isPopupOpen ? (
-        <>
-          <DeletePopUp
-            isOpen={isPopupOpen}
-            onClose={handleCancel}
-            onConfirm={handleConfirmDelete}
-            title={`Delete "${book.title}"`}
-          />
-        </>
-      ) : (
-        <>
-          <BookTitle>{book.title}</BookTitle>
-          <p>
-            <strong>Author:</strong>{" "}
-            {book.author.firstName + " " + book.author.lastName}
-          </p>
-          <p>
-            <strong>Year Published:</strong> {book.year}
-          </p>
-          <p>
-            <strong>Genre:</strong>{" "}
-            {book.genre.map((g, index) => (
-              <span key={g.value}>
-                {g.label}
-                {index !== book.genre.length - 1 ? ", " : ""}
-              </span>
-            ))}
-          </p>
-          <ButtonContainer>
-            <Button onClick={() => navigate(`/edit/${book.id}`)}>
-              <FontAwesomeIcon icon={faEdit} style={{ marginRight: "5px" }} />
-              Edit
-            </Button>
-            <Button onClick={handleDeleteClick}>
-              <FontAwesomeIcon icon={faTrash} style={{ marginRight: "5px" }} />
-              Delete
-            </Button>
-          </ButtonContainer>
-        </>
-      )}
-    </BookCard>
+    <article aria-labelledby={`book-title-${book.title}`}>
+      <BookCard>
+        {isPopupOpen ? (
+          <>
+            <DeletePopUp
+              isOpen={isPopupOpen}
+              onClose={handleCancel}
+              onConfirm={handleConfirmDelete}
+              title={`Delete "${book.title}"`}
+            />
+          </>
+        ) : (
+          <>
+            <BookTitle>{book.title}</BookTitle>
+            <section>
+              <p>
+                <strong>Author:</strong>{" "}
+                {book.author.firstName + " " + book.author.lastName}
+              </p>
+              <p>
+                <strong>Year Published:</strong> {book.year}
+              </p>
+              <p>
+                <strong>Genre:</strong>{" "}
+                {book.genre.map((g, index) => (
+                  <span key={g.value}>
+                    {g.label}
+                    {index !== book.genre.length - 1 ? ", " : ""}
+                  </span>
+                ))}
+              </p>
+            </section>
+            <ButtonContainer>
+              <Button
+                onClick={() => navigate(`/edit/${book.id}`)}
+                aria-label={"Edit this book: " + book.title}
+              >
+                <FontAwesomeIcon icon={faEdit} style={{ marginRight: "5px" }} />
+                Edit
+              </Button>
+              <Button
+                onClick={handleDeleteClick}
+                aria-label={"Delete this book: " + book.title}
+              >
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  style={{ marginRight: "5px" }}
+                />
+                Delete
+              </Button>
+            </ButtonContainer>
+          </>
+        )}
+      </BookCard>
+    </article>
   );
 };
 

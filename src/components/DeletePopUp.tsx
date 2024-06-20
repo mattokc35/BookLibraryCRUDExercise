@@ -28,11 +28,11 @@ const DeletePopUp: React.FC<DeletePopUp> = ({
         Are you sure you want to delete this book?
       </div>
       <ButtonContainer>
-        <Button onClick={onClose}>
+        <Button onClick={onClose} aria-label="Cancel Deletion">
           <FontAwesomeIcon icon={faBan} style={{ marginRight: "5px" }} />
           Cancel
         </Button>
-        <Button onClick={onConfirm}>
+        <Button onClick={onConfirm} aria-label="Confirm Deletion">
           <FontAwesomeIcon icon={faCheck} style={{ marginRight: "5px" }} />
           Confirm
         </Button>

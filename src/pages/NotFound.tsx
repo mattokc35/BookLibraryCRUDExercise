@@ -5,7 +5,9 @@ const NotFound: React.FC = () => {
   return (
     <div>
       <p>404 Page Not Found</p>
-      <Link to="/">Click here to go home</Link>
+      <Link to="/" aria-label="Go back home">
+        Click here to go home
+      </Link>
     </div>
   );
 };
