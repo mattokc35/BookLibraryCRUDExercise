@@ -96,9 +96,7 @@ const BookForm: React.FC<BookFormProps> = ({
     //validate year
     const parsedYear = parseInt(year, 10);
     if (parsedYear > 2024 || parsedYear < 0) {
-      setYearError(
-        "Year must be greater than or equal to 0 and less than or equal 2024"
-      );
+      setYearError("Year must be >= 0 and <= 2024");
       setSubmissionStatus("Error");
       return;
     } else {
@@ -148,91 +146,80 @@ const BookForm: React.FC<BookFormProps> = ({
   };
 
   return (
-    <FormContainer>
-      <form onSubmit={handleSubmit}>
-        <FormGroup>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          {titleError && <ErrorMessage role="alert">{titleError}</ErrorMessage>}
-        </FormGroup>
-        <FormGroup>
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            type="text"
-            id="firstName"
-            value={author.firstName}
-            onChange={(e) =>
-              setAuthor({ ...author, firstName: e.target.value })
-            }
-            required
-          />
-          {authorError && (
-            <ErrorMessage role="alert">{authorError}</ErrorMessage>
-          )}
-        </FormGroup>
-        <FormGroup>
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            type="text"
-            id="lastName"
-            value={author.lastName}
-            onChange={(e) => setAuthor({ ...author, lastName: e.target.value })}
-            required
-          />
-          {authorError && (
-            <ErrorMessage role="alert">{authorError}</ErrorMessage>
-          )}
-        </FormGroup>
-        <FormGroup>
-          <label htmlFor="year">Year Published:</label>
-          <input
-            type="number"
-            id="year"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-            required
-          />
-          {yearError && <ErrorMessage role="alert">{yearError}</ErrorMessage>}
-        </FormGroup>
-        <FormGroup>
-          <label htmlFor="genre">Genre:</label>
-          <Select
-            id="genre"
-            className="dropdown"
-            isMulti
-            options={genres.map((g) => ({ value: g.value, label: g.label }))}
-            value={selectedGenres}
-            onChange={handleGenreChange}
-            required
-          />
-          {genreError && <ErrorMessage role="alert">{genreError}</ErrorMessage>}
-        </FormGroup>
-        <ButtonContainer>
-          <Button type="submit" aria-label={submitButtonLabel}>
-            <FontAwesomeIcon
-              icon={faFloppyDisk}
-              style={{ marginRight: "5px" }}
-            />
-            {submitButtonLabel}
-          </Button>
-          <Button
-            onClick={() => navigate("/")}
-            aria-label="Cancel and go back to home"
-          >
-            <FontAwesomeIcon icon={faBan} style={{ marginRight: "5px" }} />
-            Cancel
-          </Button>
-        </ButtonContainer>
-        <div style={{ textAlign: "center" }}>
-          <SubmissionStatus status={submissionStatus} />
-        </div>
-      </form>
+    <FormContainer onSubmit={handleSubmit}>
+      <FormGroup>
+        <label htmlFor="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        {titleError && <ErrorMessage role="alert">{titleError}</ErrorMessage>}
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          value={author.firstName}
+          onChange={(e) => setAuthor({ ...author, firstName: e.target.value })}
+          required
+        />
+        {authorError && <ErrorMessage role="alert">{authorError}</ErrorMessage>}
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          value={author.lastName}
+          onChange={(e) => setAuthor({ ...author, lastName: e.target.value })}
+          required
+        />
+        {authorError && <ErrorMessage role="alert">{authorError}</ErrorMessage>}
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="year">Year Published:</label>
+        <input
+          type="number"
+          id="year"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          required
+        />
+        {yearError && <ErrorMessage role="alert">{yearError}</ErrorMessage>}
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="genre">Genre:</label>
+        <Select
+          id="genre"
+          className="dropdown"
+          isMulti
+          options={genres.map((g) => ({ value: g.value, label: g.label }))}
+          value={selectedGenres}
+          onChange={handleGenreChange}
+          required
+        />
+        {genreError && <ErrorMessage role="alert">{genreError}</ErrorMessage>}
+      </FormGroup>
+      <ButtonContainer>
+        <Button type="submit" aria-label={submitButtonLabel}>
+          <FontAwesomeIcon icon={faFloppyDisk} style={{ marginRight: "5px" }} />
+          {submitButtonLabel}
+        </Button>
+        <Button
+          onClick={() => navigate("/")}
+          aria-label="Cancel and go back to home"
+        >
+          <FontAwesomeIcon icon={faBan} style={{ marginRight: "5px" }} />
+          Cancel
+        </Button>
+      </ButtonContainer>
+      <div style={{ textAlign: "center" }}>
+        <SubmissionStatus status={submissionStatus} />
+      </div>
     </FormContainer>
   );
 };

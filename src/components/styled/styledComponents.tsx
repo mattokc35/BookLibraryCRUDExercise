@@ -56,7 +56,7 @@ export const ButtonContainer = styled.div`
   margin-bottom: 15px;
 `;
 
-export const FixedTopMenuBar = styled.div`
+export const FixedTopMenuBar = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
@@ -64,7 +64,7 @@ export const FixedTopMenuBar = styled.div`
   padding: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.2);
   @media (max-width: 900px) {
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15), 0 0 7px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
     border-radius: 0px 0px 20px 20px;
   }
 `;
@@ -100,7 +100,7 @@ export const FilterOptionsContainer = styled.div`
   }
 `;
 
-export const BookGridContainer = styled.div`
+export const BookGridContainer = styled.main`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -108,7 +108,7 @@ export const BookGridContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   margin: auto;
   padding: 40px;
   width: 40%;
@@ -146,6 +146,7 @@ export const FormGroup = styled.div`
     font-size: 25px;
     border: 1px solid #ccc;
     border-radius: 10px;
+    margin-right: 30px;
   }
 
   @media (max-width: 900px) {
@@ -163,6 +164,7 @@ export const FormGroup = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
+  color: white;
 `;
 
 export const DeleteTitle = styled.h3`
@@ -193,11 +195,11 @@ export const PaginationButton = styled.button<{ currentPage: boolean }>`
   color: ${(props) => (props.currentPage ? "black" : "#black")};
 `;
 
-export const PaginationContainer = styled.div`
+export const PaginationContainer = styled.footer`
   position: relative;
   bottom: 20px;
   left: 50%;
-  margin-top: 10px;
+  margin-top: 20px;
   transform: translateX(-50%);
   display: flex;
   justify-content: center;
