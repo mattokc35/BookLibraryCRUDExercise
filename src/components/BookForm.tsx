@@ -72,8 +72,6 @@ const BookForm: React.FC<BookFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setSubmissionStatus("Submitting...");
-
     //validate title length
     if (title.length > 50) {
       setTitleError("Title cannot exceed 50 characters.");
@@ -116,6 +114,8 @@ const BookForm: React.FC<BookFormProps> = ({
     } else {
       setGenreError("");
     }
+
+    setSubmissionStatus("Submitting...");
 
     //if no validation errors, try to submit the form
     try {
