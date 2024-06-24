@@ -3,7 +3,6 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const shortid = require("shortid");
 let { bookGenres, books } = require("./data");
-const { faTrophy } = require("@fortawesome/free-solid-svg-icons");
 
 const app = express();
 
