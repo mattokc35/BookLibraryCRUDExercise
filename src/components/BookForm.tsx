@@ -50,7 +50,8 @@ const BookForm: React.FC<BookFormProps> = ({
 
   //validation error states
   const [titleError, setTitleError] = useState("");
-  const [authorError, setAuthorError] = useState("");
+  const [authorLastNameError, setAuthorLastNameError] = useState("");
+  const [authorFirstNameError, setAuthorFirstNameError] = useState("");
   const [yearError, setYearError] = useState("");
   const [genreError, setGenreError] = useState("");
 
@@ -75,7 +76,7 @@ const BookForm: React.FC<BookFormProps> = ({
 
     //validate title length
     if (title.length > 50) {
-      setTitleError("Title cannot exceed 50 characters");
+      setTitleError("Title cannot exceed 50 characters.");
       setSubmissionStatus("Error");
       return;
     } else {
@@ -83,14 +84,18 @@ const BookForm: React.FC<BookFormProps> = ({
     }
 
     // Validate author name length
-    if (author.firstName.length > 30 || author.lastName.length > 30) {
-      setAuthorError(
-        "First name and last name cannot exceed 30 characters each"
-      );
-      setSubmissionStatus("Error");
+    if (author.firstName.length > 30) {
+      setAuthorFirstNameError("First name cannot exceed 30 characters.");
       return;
     } else {
-      setAuthorError("");
+      setAuthorFirstNameError("");
+    }
+
+    if (author.lastName.length > 30) {
+      setAuthorLastNameError("Last name cannot exceed 30 characters.");
+      return;
+    } else {
+      setAuthorLastNameError("");
     }
 
     //validate year
@@ -167,7 +172,9 @@ const BookForm: React.FC<BookFormProps> = ({
           onChange={(e) => setAuthor({ ...author, firstName: e.target.value })}
           required
         />
-        {authorError && <ErrorMessage role="alert">{authorError}</ErrorMessage>}
+        {authorFirstNameError && (
+          <ErrorMessage role="alert">{authorFirstNameError}</ErrorMessage>
+        )}
       </FormGroup>
       <FormGroup>
         <label htmlFor="lastName">Last Name:</label>
@@ -178,7 +185,9 @@ const BookForm: React.FC<BookFormProps> = ({
           onChange={(e) => setAuthor({ ...author, lastName: e.target.value })}
           required
         />
-        {authorError && <ErrorMessage role="alert">{authorError}</ErrorMessage>}
+        {authorLastNameError && (
+          <ErrorMessage role="alert">{authorLastNameError}</ErrorMessage>
+        )}
       </FormGroup>
       <FormGroup>
         <label htmlFor="year">Year Published:</label>

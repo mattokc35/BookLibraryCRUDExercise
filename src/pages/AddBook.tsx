@@ -2,7 +2,7 @@ import React from "react";
 import useStore from "../store";
 import BookForm from "../components/BookForm";
 import { AuthorName, Genre } from "../types/Types";
-import { Title } from "../components/styled/styledComponents";
+import { FormTitle } from "../components/styled/styledComponents";
 
 const AddBook: React.FC = () => {
   const addBook = useStore((state) => state.addBook);
@@ -25,7 +25,7 @@ const AddBook: React.FC = () => {
 
   return (
     <div>
-      <Title>Add New Book</Title>
+      <FormTitle>Add New Book</FormTitle>
       <BookForm
         onSubmit={handleSubmit}
         submitButtonLabel="Add Book"

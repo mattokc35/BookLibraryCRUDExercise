@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useStore from "../store";
 import { AuthorName, Genre } from "../types/Types";
 import BookForm from "../components/BookForm";
-import { Title } from "../components/styled/styledComponents";
+import { FormTitle } from "../components/styled/styledComponents";
 import { Link } from "react-router-dom";
 
 const EditBook: React.FC = () => {
@@ -44,7 +44,7 @@ const EditBook: React.FC = () => {
 
   return (
     <>
-      <Title>Edit Book</Title>
+      <FormTitle>Edit Book</FormTitle>
       <BookForm
         initialValues={{
           title: book.title,

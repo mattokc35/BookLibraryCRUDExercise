@@ -167,6 +167,11 @@ export const Title = styled.h1`
   color: white;
 `;
 
+export const FormTitle = styled.h1`
+  text-align: center;
+  color: black;
+`;
+
 export const DeleteTitle = styled.h3`
   text-align: center;
 `;
