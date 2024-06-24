@@ -23,7 +23,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const BookList: React.FC = () => {
-  const { books, fetchBooks, deleteBook, fetchGenres, genres } = useStore();
+  const { books, fetchBooks, deleteBook, fetchGenres, genres, serverError } =
+    useStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [booksPerPage, setBooksPerPage] = useState(12);
   const [filteredBooks, setFilteredBooks] = useState([...books].reverse());
@@ -228,7 +229,12 @@ const BookList: React.FC = () => {
         />
       </FixedTopMenuBar>
       <BookGridContainer>
-        {filteredBooks.length > 0 ? (
+        {serverError && (
+          <h2 role="alert">
+            Server Error. Backend is currently down. Please try again later!
+          </h2>
+        )}
+        {!serverError && filteredBooks.length > 0 ? (
           currentBooks.map((book) => (
             <Book key={book.id} book={book} onDelete={deleteBook} />
           ))

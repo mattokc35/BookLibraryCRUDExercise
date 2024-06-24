@@ -11,6 +11,7 @@ import { Book, Genre } from "./types/Types";
 interface StoreState {
   books: Book[];
   genres: Genre[];
+  serverError: boolean;
   fetchBooks: () => void;
   addBook: (book: Omit<Book, "id">) => void;
   updateBook: (book: Book) => void;
@@ -21,11 +22,13 @@ interface StoreState {
 const useStore = create<StoreState>((set) => ({
   books: [],
   genres: [],
+  serverError: false,
   fetchBooks: async () => {
     try {
       const books = await fetchBooks();
       set({ books });
     } catch (error) {
+      set((state) => ({ ...state, serverError: true }));
       console.error("Failed to fetch books:", error);
     }
   },
@@ -34,6 +37,7 @@ const useStore = create<StoreState>((set) => ({
       const newBook = await addBook(book);
       set((state) => ({ books: [...state.books, newBook] }));
     } catch (error) {
+      set((state) => ({ ...state, serverError: true }));
       console.error("Failed to add book:", error);
       throw error;
     }
@@ -45,6 +49,7 @@ const useStore = create<StoreState>((set) => ({
         books: state.books.map((b) => (b.id === book.id ? book : b)),
       }));
     } catch (error) {
+      set((state) => ({ ...state, serverError: true }));
       console.error("Failed to update book:", error);
       throw error;
     }
@@ -56,6 +61,7 @@ const useStore = create<StoreState>((set) => ({
         books: state.books.filter((book) => book.id !== id),
       }));
     } catch (error) {
+      set((state) => ({ ...state, serverError: true }));
       console.error("Failed to delete book:", error);
       throw error;
     }
@@ -65,6 +71,7 @@ const useStore = create<StoreState>((set) => ({
       const genres = await fetchGenres();
       set({ genres });
     } catch (error) {
+      set((state) => ({ ...state, serverError: true }));
       console.error("Failed to fetch genres:", error);
     }
   },

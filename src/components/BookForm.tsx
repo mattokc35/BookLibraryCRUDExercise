@@ -69,52 +69,60 @@ const BookForm: React.FC<BookFormProps> = ({
     setSelectedGenres(initialValues.genre);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateForm = () => {
+    let isValid = true;
 
-    //validate title length
     if (title.length > 50) {
       setTitleError("Title cannot exceed 50 characters.");
-      setSubmissionStatus("Error");
-      return;
+      isValid = false;
     } else {
       setTitleError("");
     }
 
-    // Validate author name length
     if (author.firstName.length > 30) {
       setAuthorFirstNameError("First name cannot exceed 30 characters.");
-      return;
+      isValid = false;
     } else {
       setAuthorFirstNameError("");
     }
 
     if (author.lastName.length > 30) {
       setAuthorLastNameError("Last name cannot exceed 30 characters.");
-      return;
+      isValid = false;
     } else {
       setAuthorLastNameError("");
     }
 
-    //validate year
     const parsedYear = parseInt(year, 10);
     if (parsedYear > 2024 || parsedYear < 0) {
       setYearError("Year must be >= 0 and <= 2024");
-      setSubmissionStatus("Error");
-      return;
+      isValid = false;
     } else {
       setYearError("");
     }
 
-    //validate genres
     if (selectedGenres.length > 5) {
       setGenreError("Select up to 5 genres");
-      setSubmissionStatus("Error");
-      return;
+      isValid = false;
     } else {
       setGenreError("");
     }
 
+    return isValid;
+  };
+
+  useEffect(() => {
+    validateForm();
+  }, [title, author, year, selectedGenres]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      setSubmissionStatus("Error");
+      return;
+    }
+    const parsedYear = parseInt(year, 10);
     setSubmissionStatus("Submitting...");
 
     //if no validation errors, try to submit the form
@@ -125,14 +133,15 @@ const BookForm: React.FC<BookFormProps> = ({
         year: parsedYear,
         genre: selectedGenres,
       });
-      console.log("is Success ", isSuccess);
+
       if (isSuccess) {
-        setSubmissionStatus("Success");
+        console.log("is Success ", isSuccess);
         //reset form fields after successful submission
         setTitle("");
         setAuthor({ firstName: "", lastName: "" });
         setYear("");
         setSelectedGenres([]);
+        setSubmissionStatus("Success");
         //navigate to home page after 1.5 seconds
         setTimeout(() => {
           navigate("/");
