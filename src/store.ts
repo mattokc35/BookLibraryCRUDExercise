@@ -11,7 +11,6 @@ import { Book, Genre } from "./types/Types";
 interface StoreState {
   books: Book[];
   genres: Genre[];
-  serverError: boolean;
   fetchBooks: () => void;
   addBook: (book: Omit<Book, "id">) => void;
   updateBook: (book: Book) => void;
@@ -22,13 +21,11 @@ interface StoreState {
 const useStore = create<StoreState>((set) => ({
   books: [],
   genres: [],
-  serverError: false,
   fetchBooks: async () => {
     try {
       const books = await fetchBooks();
       set({ books });
     } catch (error) {
-      set((state) => ({ ...state, serverError: true }));
       console.error("Failed to fetch books:", error);
     }
   },
